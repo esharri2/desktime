@@ -1,0 +1,4 @@
+.page-container {
+  max-width: var(--breakpoint-xl);
+  margin: 0 auto;
+}

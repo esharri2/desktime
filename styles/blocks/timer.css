@@ -1,0 +1,9 @@
+.timer {
+  margin: 50px auto;
+  max-width: 400px;
+}
+
+.timer__label {
+  display: block;
+  margin: 10px 0;
+}

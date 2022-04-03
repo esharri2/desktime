@@ -1,0 +1,33 @@
+/* Creates a left sidebar / content on right layout */
+
+.with-sidebar {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-xxl);
+
+  & > *:first-child {
+    flex: var(--sidebar-width, 250px) 0 0;
+  }
+
+  & > :last-child {
+    flex: 100% 1 1;
+  }
+
+  &[data-state*="right"] {
+    & > *:last-child {
+      /* border-right: solid 1px var(--color-silver-sand); */
+      flex: var(--sidebar-width, 250px) 0 0;
+    }
+
+    & > :first-child {
+      flex: 100% 1 1;
+    }
+  }
+
+  &[data-state*="desktop"] {
+    display: block;
+    @media (min-width: 1008px) {
+      display: flex;
+    }
+  }
+}

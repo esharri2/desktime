@@ -1,0 +1,15 @@
+.skip-to-content {
+  background: var(--color-accent-secondary);
+  border-radius: 5px;
+  color: var(--color-background);
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  text-decoration: none;
+  transform: translateY(-300%);
+  transition: transform 0.3s;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0%);
+}

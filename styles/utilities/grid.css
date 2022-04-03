@@ -1,0 +1,13 @@
+[class*=grid] {
+  display: grid;
+  gap: var(--space-m);
+  --grid-1-2: 1fr;
+
+  @media (min-width: 768px) {
+    --grid-1-2: 1fr 1fr;    
+  }
+}
+
+.grid-1-2 {
+  grid-template-columns: var(--grid-1-2);
+}

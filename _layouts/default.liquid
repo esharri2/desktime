@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% render 'head', description: description, meta: meta, page: page, title: title %}
+  <body class="page-container">
+    {% render 'ie-notice' %}
+    {% render 'skip-to-content' %}
+      <div>
+        <main id="main">
+          {{ content }}
+        </main>
+      </div>
+    </div>
+    {% render 'footer', meta: meta %}
+  </body>
+</html>

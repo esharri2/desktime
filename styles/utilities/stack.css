@@ -1,0 +1,8 @@
+/* 
+STACK 
+Vertical stack
+via https://cube.fyi/composition/#main-content
+*/
+.stack > * + * {
+  margin-top: var(--flow-space, 1em);
+}

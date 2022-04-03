@@ -1,0 +1,73 @@
+
+<head>
+  {% capture title %}{% if pageTitle %}{{pageTitle}} | {% endif %} {{ meta.title }}{% endcapture %}
+  {% assign description = pageDescription | default: meta.desc %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title | replace: "<br>", ""}}</title>
+  {% if meta.name %}
+    <meta name="author" content="{{meta.name}}">
+  {% endif %}
+  <meta name="description" content="{{description}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{meta.url}}">
+  {% if img and img_alt %}
+    <meta property="og:image" content="{{meta.img}}">
+    <meta property="og:image:alt" content="{{meta.img_alt}}">
+  {% endif %}
+  <meta name="twitter:card" content="{{meta.witter_card_type}}">
+  {% if twitter_handle %}
+    <meta name="twitter:site" content="{{meta.twitter_handle}}">
+  {% endif %}
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  {% if img and img_alt %}
+    <meta name="twitter:image" content="{{img}}">
+    <meta name="twitter:image:alt" content="{{img_alt}}">
+  {% endif %}
+  <link rel="canonical" href="{{meta.url}}">
+
+  <meta content="{{theme_color}}" name="msapplication-TileColor">
+  <meta content="{{theme_color}}" name="theme-color">
+
+  {% comment %} Icons {% endcomment %}
+  <link
+      href="/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180">
+  <link
+      href="/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png">
+  <link
+      href="/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png">
+  <link href="/webmanifest" rel="manifest">
+  <link
+      color="#5bbad5"
+      href="/safari-pinned-tab.svg"
+      rel="mask-icon">
+  {% comment %}
+  <link
+      as="font"
+      crossorigin
+      href="/vidaloka.woff2"
+      rel="preload"
+      type="font/woff2" />
+  {% endcomment %}
+
+  <link href="/index.css" rel="stylesheet" type="text/css" />
+  {% comment %} Inline JS can go here...
+  <script>
+      {{ js | jsmin }}
+  </script>
+  {% endcomment %}
+
+  <script async src="/main.js"></script>
+</head>

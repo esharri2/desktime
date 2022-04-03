@@ -1,0 +1,12 @@
+.ie-notice {
+  background-color: yellow;
+  text: black;
+  text-align: center;
+  padding: 20px;
+}
+
+@supports(-webkit-appearance: none) {
+    .ie-notice {
+        display: none!important;
+    }
+}

@@ -1,0 +1,36 @@
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  picture,
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  filter: sepia(50%);
+
+  &.top {
+    img {
+      object-position: top;
+    }
+  }
+
+  &.bottom {
+    img {
+      object-position: bottom;
+    }
+  }
+}
+
+.background-image.darken {
+  filter: sepia(50%) brightness(50%);
+}
