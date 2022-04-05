@@ -1,30 +1,24 @@
-// worker.js
+let timer;
 
 const controls = {
   start: () => {
-    console.log("start!");
+    timer = setInterval(function () {
+      postMessage("");
+    }, 1000);
   },
   pause: () => {
-    console.log("pause i guess");
+    console.log("pause");
+    clearInterval(timer);
   },
   stop: () => {
-    console.log("stoooop");
+    console.log("stop");
+    clearInterval(timer);
   },
 };
 
 onmessage = function ({ data }) {
-  debugger;
   if (!controls[data]) {
     console.log("issue!");
   }
   controls[data]();
-
-  // console.log("Message received from main script");
-  // var workerResult = "Result: " + e.data[0] * e.data[1];
-  // console.log("Posting message back to main script");
-  // postMessage(workerResult);
 };
-
-// setInterval(function () {
-//   postMessage("");
-// }, 3000);

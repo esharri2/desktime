@@ -1,0 +1,11 @@
+.settings__radio-text {
+  display: none;
+}
+
+label:checked {
+  color: lime;
+}
+
+input:checked + label + div {
+  display: block;
+}
