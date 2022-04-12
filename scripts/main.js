@@ -1,7 +1,7 @@
 // Importing main CSS so Rollup will watch and bundle with PostCSS!
 import "../styles/index.css";
 import { beep, speak } from "./_sounds";
-import { setPreference } from "./_storage.js";
+import { getPreference, setPreference } from "./_storage.js";
 const timer = new Worker("timer.js");
 
 // Elements
@@ -11,8 +11,6 @@ const workDurationDisplay = form.querySelector("#workDuration");
 const breakDurationInput = form.querySelector("[name='breakDuration']");
 const breakDurationDisplay = form.querySelector("#breakDuration");
 const settings = document.querySelector(".settings__form");
-// const playButton = form.querySelector(".timer__play");
-// const stopButton = form.querySelector(".timer__stop");
 
 // State
 const state = {
@@ -24,7 +22,6 @@ const state = {
 
 // Time
 const tick = () => {
-  console.log("tick...");
   state.elapsedSeconds = state.elapsedSeconds + 1;
   let duration;
   let display;
@@ -38,11 +35,27 @@ const tick = () => {
   }
 
   if (state.elapsedSeconds === duration) {
+    playSound();
     state.elapsedSeconds = 0;
     display.innerHTML = duration;
     state.breaking = !state.breaking;
   } else {
     display.innerHTML = duration - state.elapsedSeconds;
+  }
+};
+
+const playSound = () => {
+  const soundPreference = state.breaking
+    ? getPreference("workStart")
+    : getPreference("breakStart");
+
+  if (soundPreference === "voice") {
+    const text = state.breaking
+      ? getPreference("workStarVoice") || "work"
+      : getPreference("breakStartVoice") || "break";
+    speak(text);
+  } else {
+    beep();
   }
 };
 
@@ -74,6 +87,8 @@ const stop = () => {
   state.paused = false;
   timer.postMessage("stop");
   form.removeAttribute("data-state");
+  workDurationDisplay.innerHTML = workDurationInput.value * 60;
+  breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
 };
 
 // Attach listeners
@@ -89,3 +104,15 @@ form.addEventListener("reset", (event) => {
 settings.addEventListener("change", (event) => {
   setPreference(event);
 });
+
+// Initialize form with values from local storage
+const setUpForm = () => {
+  console.log(form);
+  Object.keys(localStorage).forEach((key) => {
+    const input = settings.querySelector(`[name="${key}"]`);
+    if (!input) return;
+    input.value = getPreference(key);
+  });
+};
+
+setUpForm();

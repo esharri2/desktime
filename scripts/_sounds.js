@@ -1,3 +1,5 @@
+import { getPreference } from "./_storage";
+
 const beep = () => {
   console.log("sound!");
   let audio_ctx = new AudioContext();

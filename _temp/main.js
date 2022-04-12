@@ -4,12 +4,43 @@
   const setPreference = (event) => {
     const target = event.target;
     const { value, id, type, name } = target;
-    console.log(id, name);
     if (type === "text") {
       localStorage.setItem(id, value);
       return;
     }
     localStorage.setItem(name, value);
+  };
+
+  const getPreference = (id) => {
+    return localStorage.getItem(id);
+  };
+
+  const beep = () => {
+    console.log("sound!");
+    let audio_ctx = new AudioContext();
+
+    let volume = 0.5;
+    let frequency = 200;
+    let oscillation_type = "sine";
+    let duration = 1;
+
+    let oscillator = audio_ctx.createOscillator();
+    let gain = audio_ctx.createGain();
+
+    oscillator.connect(gain);
+    oscillator.frequency.value = frequency;
+    oscillator.type = oscillation_type;
+
+    gain.connect(audio_ctx.destination);
+
+    gain.gain.value = volume;
+
+    oscillator.start(audio_ctx.currentTime);
+    oscillator.stop(audio_ctx.currentTime + duration);
+  };
+
+  const speak = (text) => {
+    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
   };
 
   // Importing main CSS so Rollup will watch and bundle with PostCSS!
@@ -22,8 +53,6 @@
   const breakDurationInput = form.querySelector("[name='breakDuration']");
   const breakDurationDisplay = form.querySelector("#breakDuration");
   const settings = document.querySelector(".settings__form");
-  // const playButton = form.querySelector(".timer__play");
-  // const stopButton = form.querySelector(".timer__stop");
 
   // State
   const state = {
@@ -35,7 +64,6 @@
 
   // Time
   const tick = () => {
-    console.log("tick...");
     state.elapsedSeconds = state.elapsedSeconds + 1;
     let duration;
     let display;
@@ -49,11 +77,27 @@
     }
 
     if (state.elapsedSeconds === duration) {
+      playSound();
       state.elapsedSeconds = 0;
       display.innerHTML = duration;
       state.breaking = !state.breaking;
     } else {
       display.innerHTML = duration - state.elapsedSeconds;
+    }
+  };
+
+  const playSound = () => {
+    const soundPreference = state.breaking
+      ? getPreference("workStart")
+      : getPreference("breakStart");
+
+    if (soundPreference === "voice") {
+      const text = state.breaking
+        ? getPreference("workStarVoice") || "work"
+        : getPreference("breakStartVoice") || "break";
+      speak(text);
+    } else {
+      beep();
     }
   };
 
@@ -85,6 +129,8 @@
     state.paused = false;
     timer.postMessage("stop");
     form.removeAttribute("data-state");
+    workDurationDisplay.innerHTML = workDurationInput.value * 60;
+    breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
   };
 
   // Attach listeners
@@ -100,5 +146,17 @@
   settings.addEventListener("change", (event) => {
     setPreference(event);
   });
+
+  // Initialize form with values from local storage
+  const setUpForm = () => {
+    console.log(form);
+    Object.keys(localStorage).forEach((key) => {
+      const input = settings.querySelector(`[name="${key}"]`);
+      if (!input) return;
+      input.value = getPreference(key);
+    });
+  };
+
+  setUpForm();
 
 })();

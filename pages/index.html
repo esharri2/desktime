@@ -1,12 +1,12 @@
 <form class="timer">
   <label class="timer__label">
     Work duration
-    <input value="2" type="number" name="workDuration" />
+    <input value=".2" type="number" name="workDuration" />
     <span id="workDuration" class="timer__display"></span>
   </label>
   <label class="timer__label">
     Break duration
-    <input value="1" type="number" name="breakDuration" />
+    <input value=".1" type="number" name="breakDuration" />
     <span id="breakDuration" class="timer__display"></span>
   </label>
   <button type="submit" class="timer__play">Play</button>
@@ -29,10 +29,10 @@
         <label for="ascChime">Ascending chime</label>
       </div>
       <div class="settings__radio">
-        <input type="radio" id="workVoice" name="workStart" value="workVoice" />
+        <input type="radio" id="workVoice" name="workStart" value="voice" />
         <label for="workVoice">Voice</label>
         <div class="settings__radio-text">
-          <input id="workVoiceText" type="text" value="start" />
+          <input id="workVoiceText" name="workVoiceText" type="text" value="start" />
           <label for="workVoiceText">Text</label>
         </div>
       </div>
@@ -50,10 +50,10 @@
         <label for="descChime">Descending chime</label>
       </div>
       <div class="settings__radio">
-        <input type="radio" id="breakVoice" name="breakStart" value="breakVoice" />
+        <input type="radio" id="breakVoice" name="breakStart" value="voice" />
         <label for="breakVoice">Voice</label>
         <div class="settings__radio-text">
-          <input id="breakVoiceText" type="text" value="break" />
+          <input id="breakVoiceText" name="breakVoiceText" type="text" value="break" />
           <label for="breakVoiceText">Text</label>
         </div>
       </div>

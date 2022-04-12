@@ -1,7 +1,6 @@
 const setPreference = (event) => {
   const target = event.target;
   const { value, id, type, name } = target;
-  console.log(id, name);
   if (type === "text") {
     localStorage.setItem(id, value);
     return;
