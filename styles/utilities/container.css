@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: var(--form-width);
+  padding: max(10vh, var(--space-m))  var(--space-s) var(--space-m);
+}

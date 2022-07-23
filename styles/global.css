@@ -40,7 +40,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-size: 1.6rem;
+  font-size: var(--font-size-m);
   overflow-x: hidden;
 
   &.scroll-lock {
@@ -118,6 +118,11 @@ th:not([border]), td:not([border]) {
   padding: var(--space-s);
 }
 
+input:focus {
+  outline: none;
+  transition: all var(--timing)
+}
+
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -131,4 +136,10 @@ th:not([border]), td:not([border]) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* MISC */
+.title {
+  line-height: 1;
+  margin: var(--space-m) 0;
 }

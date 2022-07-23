@@ -1,5 +1,4 @@
 :root {
-
   /* These values are hard typed for media queries throughout the project
   Use find / replace to change. */
   --breakpoint-xl: 1440px;
@@ -8,13 +7,21 @@
   --breakpoint-s: 576px;
   --breakpoint-xs: 360px;
 
-  --color-black: #000000;
-  --color-cornflower: #9ED0E6;
+  --form-width: 600px;
+
+  --color-black: #000009;
+
+  --color-cyan: #defff2;
+  --color-plum: #d68fd6;
+  --color-sea-green: #0ff4c6;
+  --color-fire: #f34213;
 
   --color-text: var(--color-black);
-  --color-background: var(--color-cornflower); 
+  --color-background: var(--color-cyan);
+  --color-accent-1: var(--color-fire);
 
-  --font-body: system-ui,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  --font-body: system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
   --font-size-xl: 3rem;
   --font-size-l: 2.2rem;
   --font-size-m: 1.75rem;
@@ -27,18 +34,16 @@
     --font-size-s: 1.2rem;
   }
 
-  --shadow-s: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  --shadow-m: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
-  --space-s: .8rem;
+  --space-s: 0.8rem;
   --space-m: 1.6rem;
   --space-l: 2.4rem;
   --space-xl: 3.2rem;
   --space-xxl: 6.4rem;
   --space-xxxl: 12.8rem;
 
-  --timing-fast: .2s;
-  --timing-medium: .5s;
+  --timing-fast: 0.2s;
+  --timing-medium: 0.5s;
+  --timing-slow: 2s;
 
   --timing-function: ease-out;
 

@@ -1,9 +1,19 @@
-.settings__radio-text {
-  display: none;
+.settings {
+  accent-color: var(--color-text);
+  margin: 0 auto;
+  max-width: var(--form-width);
+  overflow: hidden;
 }
 
-label:checked {
-  color: lime;
+.settings summary {
+  text-transform: uppercase;
+}
+
+.settings section {
+  margin-top: var(--space-m);
+}
+.settings__radio-text {
+  display: none;
 }
 
 input:checked + label + div {

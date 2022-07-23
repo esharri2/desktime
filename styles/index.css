@@ -6,7 +6,7 @@
 @import 'utilities/flow';
 @import 'utilities/grid';
 @import 'utilities/hidden';
-@import 'utilities/page-container';
+@import 'utilities/container';
 @import 'utilities/reset';
 @import 'utilities/stack';
 @import 'utilities/visually-hidden';

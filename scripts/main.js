@@ -1,8 +1,13 @@
 // Importing main CSS so Rollup will watch and bundle with PostCSS!
 import "../styles/index.css";
-import { beep, speak } from "./_sounds";
+import { ascendingTones, descendingTones, speak } from "./_sounds";
 import { getPreference, setPreference } from "./_storage.js";
+import { DetailsUtils } from "./_details-util.js";
 const timer = new Worker("timer.js");
+
+if (typeof window !== "undefined" && "customElements" in window) {
+  window.customElements.define("details-utils", DetailsUtils);
+}
 
 // Elements
 const form = document.querySelector(".timer");
@@ -35,6 +40,7 @@ const tick = () => {
   }
 
   if (state.elapsedSeconds === duration) {
+    // TODO add class to body / switch to darkmode if breaking
     playSound();
     state.elapsedSeconds = 0;
     display.innerHTML = duration;
@@ -51,11 +57,13 @@ const playSound = () => {
 
   if (soundPreference === "voice") {
     const text = state.breaking
-      ? getPreference("workStarVoice") || "work"
-      : getPreference("breakStartVoice") || "break";
+      ? getPreference("workVoiceText") || "work"
+      : getPreference("breakVoiceText") || "break";
     speak(text);
-  } else {
-    beep();
+  } else if (soundPreference === "ascChime") {
+    ascendingTones();
+  } else if (soundPreference === "descChime") {
+    descendingTones();
   }
 };
 
@@ -74,10 +82,13 @@ const play = () => {
   state.playing = true;
   state.paused = false;
   timer.postMessage("start");
-  form.setAttribute("data-state", "playing");
+  document.documentElement.classList.add("playing");
+  document.documentElement.classList.remove("paused");
 };
 
 const pause = () => {
+  debugger;
+  document.documentElement.classList.add("paused");
   state.paused = true;
   timer.postMessage("pause");
 };
@@ -85,8 +96,10 @@ const pause = () => {
 const stop = () => {
   state.playing = false;
   state.paused = false;
+  state.elapsedSeconds = 0;
   timer.postMessage("stop");
-  form.removeAttribute("data-state");
+  document.documentElement.classList.remove("paused");
+  document.documentElement.classList.remove("playing");
   workDurationDisplay.innerHTML = workDurationInput.value * 60;
   breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
 };
@@ -101,17 +114,25 @@ form.addEventListener("reset", (event) => {
   stop();
 });
 
+form.addEventListener("change", (event) => {
+  setPreference(event);
+});
+
 settings.addEventListener("change", (event) => {
   setPreference(event);
 });
 
 // Initialize form with values from local storage
 const setUpForm = () => {
-  console.log(form);
   Object.keys(localStorage).forEach((key) => {
-    const input = settings.querySelector(`[name="${key}"]`);
-    if (!input) return;
-    input.value = getPreference(key);
+    const inputs = document.querySelectorAll(`[name="${key}"]`);
+    inputs.forEach((input) => {
+      if (input.matches("[type='radio']")) {
+        input.checked = input.value === getPreference(key);
+      } else {
+        input.setAttribute("value", getPreference(key));
+      }
+    });
   });
 };
 

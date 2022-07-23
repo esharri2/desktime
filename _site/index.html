@@ -52,7 +52,8 @@
   <link href="/index.css" rel="stylesheet" type="text/css" />
   
 
-  <script async src="/main.js"></script>
+  <script defer src="https://unpkg.com/tone"></script>  
+  <script defer src="/main.js"></script>
 </head>
   <body class="page-container">
     <div class="ie-notice">This site is not made to be used with Internet Explorer. We recommend using a different browser.</div>
@@ -63,72 +64,129 @@
 </a>
       <div>
         <main id="main">
-          <form class="timer">
-  <label class="timer__label">
-    Work duration
-    <input value=".2" type="number" name="workDuration" />
-    <span id="workDuration" class="timer__display"></span>
-  </label>
-  <label class="timer__label">
-    Break duration
-    <input value=".1" type="number" name="breakDuration" />
-    <span id="breakDuration" class="timer__display"></span>
-  </label>
-  <button type="submit" class="timer__play">Play</button>
-  <button type="reset" class="timer__stop">Stop</button>
-</form>
-
-<details class="settings">
-  <summary>Settings</summary>
-  <form class="settings__form">
-    <section data-type="work">
-      <p>Select a work alert:</p>
-      <div class="settings__radio">
-        <input
-          type="radio"
-          id="ascChime"
-          name="workStart"
-          value="ascChime"
-          checked
-        />
-        <label for="ascChime">Ascending chime</label>
-      </div>
-      <div class="settings__radio">
-        <input type="radio" id="workVoice" name="workStart" value="voice" />
-        <label for="workVoice">Voice</label>
-        <div class="settings__radio-text">
-          <input id="workVoiceText" name="workVoiceText" type="text" value="start" />
-          <label for="workVoiceText">Text</label>
-        </div>
-      </div>
-    </section>
-    <section data-type="break">
-      <p>Select a break alert:</p>
-      <div class="settings__radio">
-        <input
-          type="radio"
-          id="descChime"
-          name="breakStart"
-          value="ascChime"
-          checked
-        />
-        <label for="descChime">Descending chime</label>
-      </div>
-      <div class="settings__radio">
-        <input type="radio" id="breakVoice" name="breakStart" value="voice" />
-        <label for="breakVoice">Voice</label>
-        <div class="settings__radio-text">
-          <input id="breakVoiceText" name="breakVoiceText" type="text" value="break" />
-          <label for="breakVoiceText">Text</label>
-        </div>
-      </div>
-    </section>
+          <div class="container">
+  <h1 class="title">Breaktime</h1>
+  <form class="timer">
+    <label class="timer__label">
+      Work minutes
+      <input
+        class="timer__input hidden-playing"
+        step=".1"
+        min=".1"
+        value="2"
+        type="number"
+        name="workDuration"
+      />
+      <span id="workDuration" class="timer__display hidden-stopped"></span>
+    </label>
+    <label class="timer__label">
+      Break minutes
+      <input
+        class="timer__input hidden-playing"
+        min=".1"
+        step=".1"
+        value="1"
+        type="number"
+        name="breakDuration"
+      />
+      <span id="breakDuration" class="timer__display hidden-stopped"></span>
+    </label>
+    <div class="timer__controls">
+      <button type="submit" class="button timer__button timer__play">
+        <span class="hidden-playing">Start</span>
+        <span class="hidden-unpaused hidden-stopped">Continue</span>
+        <span class="hidden-paused hidden-stopped">Pause</span></button>
+      <button type="reset" class="button timer__button timer__stop hidden-stopped">Stop</button>
+    </div>
   </form>
-</details>
+  <details-utils animate close-click-outside close-esc>
+    <details class="settings hidden-playing" id="settings">
+      <summary>Settings</summary>
+      <form class="settings__form">
+        <section data-type="work">
+          <p>Work alert:</p>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="ascChime"
+              name="workStart"
+              value="ascChime"
+              checked
+            />
+            <label for="ascChime">Ascending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="descChime"
+              name="workStart"
+              value="descChime"
+              checked
+            />
+            <label for="descChime">Descending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input type="radio" id="workVoice" name="workStart" value="voice" />
+            <label for="workVoice">Voice</label>
+            <div class="settings__radio-text">
+              <input
+                id="workVoiceText"
+                name="workVoiceText"
+                type="text"
+                value="start"
+              />
+              <label for="workVoiceText">Text</label>
+            </div>
+          </div>
+        </section>
+        <section data-type="break">
+          <p>Break alert:</p>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="ascChimeBreak"
+              name="breakStart"
+              value="ascChime"
+              checked
+            />
+            <label for="ascChimeBreak">Ascending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="descChimeBreak"
+              name="breakStart"
+              value="descChime"
+              checked
+            />
+            <label for="descChimeBreak">Descending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="breakVoice"
+              name="breakStart"
+              value="voice"
+            />
+            <label for="breakVoice">Voice</label>
+            <div class="settings__radio-text">
+              <input
+                id="breakVoiceText"
+                name="breakVoiceText"
+                type="text"
+                value="break"
+              />
+              <label for="breakVoiceText">Text</label>
+            </div>
+          </div>
+        </section>
+      </form>
+    </details>
+  </details-utils>
+</div>
 
         </main>
       </div>
     </div>
-    <p>footer</p>
   </body>
 </html>

@@ -1,5 +1,4 @@
 :root {
-
   /* These values are hard typed for media queries throughout the project
   Use find / replace to change. */
   --breakpoint-xl: 1440px;
@@ -8,13 +7,21 @@
   --breakpoint-s: 576px;
   --breakpoint-xs: 360px;
 
-  --color-black: #000000;
-  --color-cornflower: #9ED0E6;
+  --form-width: 600px;
+
+  --color-black: #000009;
+
+  --color-cyan: #defff2;
+  --color-plum: #d68fd6;
+  --color-sea-green: #0ff4c6;
+  --color-fire: #f34213;
 
   --color-text: var(--color-black);
-  --color-background: var(--color-cornflower); 
+  --color-background: var(--color-cyan);
+  --color-accent-1: var(--color-fire);
 
-  --font-body: system-ui,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  --font-body: system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
   --font-size-xl: 3rem;
   --font-size-l: 2.2rem;
   --font-size-m: 1.75rem;
@@ -33,18 +40,16 @@
 
   :root {
 
-  --shadow-s: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  --shadow-m: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
-  --space-s: .8rem;
+  --space-s: 0.8rem;
   --space-m: 1.6rem;
   --space-l: 2.4rem;
   --space-xl: 3.2rem;
   --space-xxl: 6.4rem;
   --space-xxxl: 12.8rem;
 
-  --timing-fast: .2s;
-  --timing-medium: .5s;
+  --timing-fast: 0.2s;
+  --timing-medium: 0.5s;
+  --timing-slow: 2s;
 
   --timing-function: ease-out;
   --button-bar-height: 50px;
@@ -87,7 +92,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-size: 1.6rem;
+  font-size: var(--font-size-m);
   overflow-x: hidden;
 }
 body.scroll-lock {
@@ -152,6 +157,10 @@ th:not([border]), td:not([border]) {
   border: solid 1px var(--color-accent-light);
   padding: var(--space-s);
 }
+input:focus {
+  outline: none;
+  transition: all var(--timing)
+}
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -167,6 +176,11 @@ th:not([border]), td:not([border]) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+/* MISC */
+.title {
+  line-height: 1;
+  margin: var(--space-m) 0;
 }
 /* Utilities */
 [class*=col-] {
@@ -219,19 +233,31 @@ More: https://piccalil.li/quick-tip/flow-utility
 .hidden {
   display: none !important;
 }
-@media (max-width: 1007px ) {
+@media (max-width: 1007px) {
   .hidden-medium {
     display: none !important;
   }
 }
-@media (min-width: 1008px ) {
+@media (min-width: 1008px) {
   .hidden-large {
     display: none !important;
   }
 }
-.page-container {
-  max-width: var(--breakpoint-xl);
+.playing .hidden-playing,
+:root:not(.playing) .hidden-stopped,
+:root:not(.playing) .hidden-paused,
+:root:not(.playing) .hidden-unpaused,
+.paused .hidden-paused,
+:root:not(.paused) .hidden-unpaused {
+  display: none;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
+  max-width: var(--form-width);
+  padding: max(10vh, var(--space-m))  var(--space-s) var(--space-m);
 }
 ul.reset,
 ul.reset li,
@@ -295,19 +321,65 @@ via https://cube.fyi/composition/#main-content
 .skip-to-content:focus {
   transform: translateY(0%);
 }
-.timer {
-  margin: 50px auto;
-  max-width: 400px;
+.timer__button {
+  background-color: var(--color-text);
+  border: none;
+  color: var(--color-background);
+  flex-basis: 50%;
+  flex-grow: 1;
+  padding: var(--space-m);
+  text-transform: uppercase;
+}
+.timer__controls {
+  display: flex;
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+.timer__input,
+.timer__display {
+  transition: border var(--timing-fast) ease-in;
+  display: block;
+  font-size: var(--font-size-l);
+  margin-top: var(--space-s);
+  width: 10ch;
+}
+.timer__display {
+  border-bottom: solid 2px transparent;
+  padding: 1px 0
+
+}
+.timer__input {
+  background: var(--color-background);
+  border: none;
+  border-bottom: solid 2px var(--color-text);
+
+}
+.timer__input:focus {
+  border-bottom-color: var(--color-accent-1);
+  outline: none;
+  transition: border var(--timing-fast) ease-in;
 }
 .timer__label {
+  border: solid 2px var(--color-text);
   display: block;
-  margin: 10px 0;
+  padding: var(--space-m) var(--space-s);
+  margin-bottom: var(--space-m);
+  text-transform: uppercase;
+}
+.settings {
+  accent-color: var(--color-text);
+  margin: 0 auto;
+  max-width: var(--form-width);
+  overflow: hidden;
+}
+.settings summary {
+  text-transform: uppercase;
+}
+.settings section {
+  margin-top: var(--space-m);
 }
 .settings__radio-text {
   display: none;
-}
-label:checked {
-  color: lime;
 }
 input:checked + label + div {
   display: block;
