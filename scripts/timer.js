@@ -7,11 +7,9 @@ const controls = {
     }, 1000);
   },
   pause: () => {
-    console.log("pause");
     clearInterval(timer);
   },
   stop: () => {
-    console.log("stop");
     clearInterval(timer);
   },
 };

@@ -15,6 +15,7 @@
 /* Blocks */
 @import 'blocks/ie-notice';
 @import 'blocks/skip-to-content';
+@import 'blocks/header';
 @import 'blocks/timer';
 @import 'blocks/settings';
 
