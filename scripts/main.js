@@ -63,9 +63,10 @@ const tick = () => {
 
 const playSound = () => {
   const soundPreference = state.breaking
-    ? getPreference("workStart")
-    : getPreference("breakStart");
-
+    ? getPreference("workStart") ||
+      settings.querySelector("input[name='workStart']:checked").value
+    : getPreference("breakStart") ||
+      settings.querySelector("input[name='breakStart']:checked").value;
   if (soundPreference === "voice") {
     const text = state.breaking
       ? getPreference("workVoiceText") || "work"
@@ -113,6 +114,7 @@ const stop = () => {
   timer.postMessage("stop");
   document.documentElement.classList.remove("paused");
   document.documentElement.classList.remove("playing");
+  document.documentElement.classList.remove("dark");
   workDurationDisplay.innerHTML = workDurationInput.value * 60;
   breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
 };
