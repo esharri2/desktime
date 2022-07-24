@@ -14,11 +14,6 @@ if (typeof window !== "undefined" && "customElements" in window) {
   window.customElements.define("details-utils", DetailsUtils);
 }
 
-document.querySelector("#test").addEventListener("click", () => {
-  console.log("test");
-  speak("this is a test");
-});
-
 // Elements
 const form = document.querySelector(".timer");
 const workDurationInput = form.querySelector("[name='workDuration']");
