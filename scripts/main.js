@@ -14,7 +14,7 @@ if (typeof window !== "undefined" && "customElements" in window) {
   window.customElements.define("details-utils", DetailsUtils);
 }
 
-document.querySelector("#button").addEventListener("click", () => {
+document.querySelector("#test").addEventListener("click", () => {
   console.log("test");
   speak("this is a test");
 });
