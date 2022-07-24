@@ -1,6 +1,11 @@
 // Importing main CSS so Rollup will watch and bundle with PostCSS!
 import "../styles/index.css";
-import { ascendingTones, descendingTones, speak } from "./_sounds";
+import {
+  ascendingTones,
+  descendingTones,
+  repeatingTones,
+  speak,
+} from "./_sounds";
 import { getPreference, setPreference } from "./_storage.js";
 import { DetailsUtils } from "./_details-util.js";
 const timer = new Worker("timer.js");
@@ -40,7 +45,8 @@ const tick = () => {
   }
 
   if (state.elapsedSeconds === duration) {
-    // TODO add class to body / switch to darkmode if breaking
+    // Toggle work/break state
+    document.documentElement.classList.toggle("dark");
     playSound();
     state.elapsedSeconds = 0;
     display.innerHTML = duration;
@@ -64,6 +70,8 @@ const playSound = () => {
     ascendingTones();
   } else if (soundPreference === "descChime") {
     descendingTones();
+  } else if (soundPreference === "repeatChime") {
+    repeatingTones();
   }
 };
 

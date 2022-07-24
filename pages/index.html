@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="title">Breaktime</h1>
   <form class="timer">
-    <label class="timer__label">
+    <label class="timer__label timer__label--work">
       Work minutes
       <input
         class="timer__input hidden-playing"
@@ -13,7 +13,7 @@
       />
       <span id="workDuration" class="timer__display hidden-stopped"></span>
     </label>
-    <label class="timer__label">
+    <label class="timer__label timer__label--break">
       Break minutes
       <input
         class="timer__input hidden-playing"
@@ -29,8 +29,14 @@
       <button type="submit" class="button timer__button timer__play">
         <span class="hidden-playing">Start</span>
         <span class="hidden-unpaused hidden-stopped">Continue</span>
-        <span class="hidden-paused hidden-stopped">Pause</span></button>
-      <button type="reset" class="button timer__button timer__stop hidden-stopped">Stop</button>
+        <span class="hidden-paused hidden-stopped">Pause</span>
+      </button>
+      <button
+        type="reset"
+        class="button timer__button timer__stop hidden-stopped"
+      >
+        Stop
+      </button>
     </div>
   </form>
   <details-utils animate close-click-outside close-esc>
@@ -58,6 +64,16 @@
               checked
             />
             <label for="descChime">Descending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="repeatChime"
+              name="workStart"
+              value="repeatChime"
+              checked
+            />
+            <label for="repeatChime">Repeating chimes</label>
           </div>
           <div class="settings__radio">
             <input type="radio" id="workVoice" name="workStart" value="voice" />
@@ -94,6 +110,16 @@
               checked
             />
             <label for="descChimeBreak">Descending chimes</label>
+          </div>
+          <div class="settings__radio">
+            <input
+              type="radio"
+              id="repeatChimeBreak"
+              name="breakStart"
+              value="repeatChime"
+              checked
+            />
+            <label for="reaptChimeBreak">Repeating chimes</label>
           </div>
           <div class="settings__radio">
             <input

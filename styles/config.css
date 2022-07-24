@@ -20,6 +20,11 @@
   --color-background: var(--color-cyan);
   --color-accent-1: var(--color-fire);
 
+  &.dark {
+    --color-text: var(--color-cyan);
+    --color-background: var(--color-black);
+  }
+
   --font-body: system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", sans-serif;
   --font-size-xl: 3rem;
