@@ -4,6 +4,7 @@
   color: var(--color-background);
   flex-basis: 50%;
   flex-grow: 1;
+  margin-bottom:  var(--space-l);
   padding: var(--space-m);
   text-transform: uppercase;
 }
@@ -25,19 +26,17 @@
 
 .timer__display {
   border-bottom: solid 2px transparent;
-  padding: 1px 0
-
+  padding: 1px 0;
 }
 
 .timer__input {
   background: var(--color-background);
   border: none;
   border-bottom: solid 2px var(--color-text);
-
 }
 
 .timer__input:focus {
-  border-bottom-color: var(--color-accent-1);
+  /* border-bottom-color: var(--color-accent-1); */
   outline: none;
   transition: border var(--timing-fast) ease-in;
 }
@@ -45,7 +44,17 @@
 .timer__label {
   border: solid 2px var(--color-text);
   display: block;
-  padding: var(--space-m) var(--space-s);
+  padding: var(--space-m);
   margin-bottom: var(--space-m);
   text-transform: uppercase;
+  transition: opacity var(--timing-medium) var(--timing-function),
+    border-color var(--timing-medium) var(--timing-function);
+}
+
+.playing {
+  &:not(.dark) .timer__label--break,
+  &.dark .timer__label--work {
+    border-color: transparent;
+    opacity: 0.4;
+  }
 }

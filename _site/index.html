@@ -65,10 +65,10 @@
       <div>
         <main id="main">
           <div class="container">
-  <h1 class="title">Breaktime</h1>
+  <h1 class="title">Desk Timer</h1>
   <form class="timer">
     <label class="timer__label timer__label--work">
-      Work minutes
+      Work <span class="hidden-playing">minutes</span>
       <input
         class="timer__input hidden-playing"
         step=".1"
@@ -80,7 +80,7 @@
       <span id="workDuration" class="timer__display hidden-stopped"></span>
     </label>
     <label class="timer__label timer__label--break">
-      Break minutes
+      Break <span class="hidden-playing">minutes</span>
       <input
         class="timer__input hidden-playing"
         min=".1"
