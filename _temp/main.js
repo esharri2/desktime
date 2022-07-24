@@ -563,9 +563,9 @@
   };
 
   const pause = () => {
-    debugger;
     document.documentElement.classList.add("paused");
     state.paused = true;
+    state.playing = false;
     timer.postMessage("pause");
   };
 
@@ -584,10 +584,12 @@
   // Attach listeners
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    debugger;
     state.playing ? pause() : play();
   });
 
   form.addEventListener("reset", (event) => {
+    event.preventDefault();
     stop();
   });
 

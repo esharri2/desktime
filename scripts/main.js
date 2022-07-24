@@ -96,9 +96,9 @@ const play = () => {
 };
 
 const pause = () => {
-  debugger;
   document.documentElement.classList.add("paused");
   state.paused = true;
+  state.playing = false;
   timer.postMessage("pause");
 };
 
@@ -121,6 +121,7 @@ form.addEventListener("submit", (event) => {
 });
 
 form.addEventListener("reset", (event) => {
+  event.preventDefault();
   stop();
 });
 
