@@ -1,7 +1,7 @@
 {
-  "title": "desk timer",
-  "desc": "The Harlan Family in America is a non-profit association formed in 1987 to perpetuate and promote the Harlan family heritage and genealogy.",
-  "url": "https://www.harlanfamily.org",
+  "title": "Desk Timer",
+  "desc": "A timer for reminding yourself to take breaks at the desk. Uses customizable sound alerts to let you know when it's time to take a break and time to start working again.",
+  "url": "https://desktimer.netlify.app/",
   "img": "",
   "img_alt": "",
   "twitter_card_type": "summary_large_image",
