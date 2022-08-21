@@ -6,6 +6,7 @@
 }
 
 .settings summary {
+  font-size: var(--font-size-m);
   text-transform: uppercase;
 }
 

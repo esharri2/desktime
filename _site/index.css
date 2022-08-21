@@ -39,7 +39,7 @@
 }
 
   @media (min-width: 768px) {:root {
-    --font-size-xl: 6rem;
+    --font-size-xl: 4rem;
     --font-size-l: 3rem;
     --font-size-m: 2rem;
     --font-size-s: 1.2rem;
@@ -403,6 +403,7 @@ header details summary::-webkit-details-marker {
   overflow: hidden;
 }
 .settings summary {
+  font-size: var(--font-size-m);
   text-transform: uppercase;
 }
 .settings section {

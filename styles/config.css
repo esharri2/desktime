@@ -33,7 +33,7 @@
   --font-size-s: 1.2rem;
 
   @media (min-width: 768px) {
-    --font-size-xl: 6rem;
+    --font-size-xl: 4rem;
     --font-size-l: 3rem;
     --font-size-m: 2rem;
     --font-size-s: 1.2rem;

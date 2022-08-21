@@ -26,7 +26,7 @@ const settings = document.querySelector(".settings__form");
 const state = {
   playing: false,
   paused: false,
-  breaking: false,
+  breaking: true,
   elapsedSeconds: 0,
 };
 
@@ -79,10 +79,12 @@ const playSound = () => {
 // Controls
 const play = () => {
   // Extra stuff for initial play
-  if (!state.playing && !state.paused) {
+  const isInitialPlayClick = !state.playing && !state.paused;
+  if (isInitialPlayClick) {
     timer.onmessage = function () {
       tick();
     };
+    playSound();
     state.breaking = false;
     workDurationDisplay.innerHTML = workDurationInput.value * 60;
     breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
