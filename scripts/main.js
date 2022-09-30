@@ -110,6 +110,7 @@ const pause = () => {
 const stop = () => {
   state.playing = false;
   state.paused = false;
+  state.breaking = true;
   state.elapsedSeconds = 0;
   timer.postMessage("stop");
   document.documentElement.classList.remove("paused");
