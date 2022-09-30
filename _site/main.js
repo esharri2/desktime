@@ -497,6 +497,8 @@
     elapsedSeconds: 0,
   };
 
+  let wakeLock = null;
+
   // Time
   const tick = () => {
     state.elapsedSeconds = state.elapsedSeconds + 1;
@@ -544,7 +546,7 @@
   };
 
   // Controls
-  const play = () => {
+  const play = async () => {
     // Extra stuff for initial play
     const isInitialPlayClick = !state.playing && !state.paused;
     if (isInitialPlayClick) {
@@ -555,6 +557,7 @@
       state.breaking = false;
       workDurationDisplay.innerHTML = workDurationInput.value * 60;
       breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
+      wakeLock = await navigator.wakeLock.request("screen");
     }
 
     state.playing = true;
@@ -581,6 +584,9 @@
     document.documentElement.classList.remove("dark");
     workDurationDisplay.innerHTML = workDurationInput.value * 60;
     breakDurationDisplay.innerHTML = breakDurationInput.value * 60;
+    wakeLock.release().then(() => {
+      wakeLock = null;
+    });
   };
 
   // Attach listeners
