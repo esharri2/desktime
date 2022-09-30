@@ -16,5 +16,5 @@
   "theme_color": "#000009",
   "background_color": "#defff2",
   "display": "standalone",
-  "start_url": "https://desktimer.netlify.app/"
+  "start_url": "/"
 }
