@@ -16,5 +16,16 @@
   "theme_color": "#000009",
   "background_color": "#defff2",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Desk Timer",
+      "short_name": "Desk Timer",
+      "description": "A work timer to help you take breaks",
+      "url": "/",
+      "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "description": "A work timer to help you take breaks"
 }
